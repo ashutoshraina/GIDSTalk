@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ScriptCS</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+    @font-face {
+      font-family: 'Yanone Kaffeesatz';
+      src: 
+        url('Yanone Kaffeesatz.woff2') format('woff2')
+      }
+       body { font-family: 'Consolas'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Consolas'; }
+
+      .title {font-size: 60px;}
+
+      .red {color: red;}
+      .green {color: green;}
+
+      img[alt="minipic"] { 
+        max-width:  150px; 
+        display: block;
+    }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: top, center, title
+
+# ScriptCS 
+    Improving your everyday workflow 
+
+---
+
+# Agenda
+
+ - What is ScriptCS ?
+ 
+ - Under the hood
+ 
+ - Up & Running with ScriptCS
+
+ - Deep dive with ScriptPacks
+ 
+ - Use Cases
+ 
+ - Demos....
+
+---
+
+# Who am I ?
+
+ - Ashutosh Raina
+ 
+ - Blog : http://ashutoshraina.github.io
+ 
+ - Twitter : @ashutoshraina
+
+  ![minipic](Selfie.jpg  "Ashutosh Raina")
+
+---
+
+# What is ScriptCS ?
+ 
+ - Use C# as a scripting language powered by Roslyn
+ 
+ - Uses the Rosyln nuget package
+ 
+ - No IDE, No dlls
+
+ - Xplat, CLI
+ 
+ - Lighter experience with faster feedback
+
+---
+
+# Installing ScriptCS
+
+  - Windows : Choclatey to install
+
+  ``` bash
+    cinst scriptcs
+  ```
+  - Mac & nix :
+  
+  ``` bash 
+    brew install mono
+    git clone git clone https://github.com/scriptcs/scriptcs
+    git checkout dev
+    chmod +x build.sh
+    sudo ./build.sh
+
+  ```
+
+  ``` bash
+  alias scriptcs='mono ~/scriptcs/scriptcs.exe'
+  ```
+   OR Shiny new way
+   
+   ```bash
+   brew install scriptcs
+   ```
+.footnote[.green[   ** Binaries available as well] ]
+
+---
+
+# Under the hood
+
+  - Uses Roslyn to compile things on the fly
+  
+  - Adds support for NuGet packages, dlls, and scripts
+  
+  - Multi-file support
+  
+  - You still need a runtime
+
+  
+.footnote[.red.bold[Namespaces are not allowed] ]
+
+---
+
+# Up & Running
+  
+  - REPL
+
+  ``` cs
+  > Console.WriteLine("Hello World");
+  Hello World
+  ```
+
+  - REPL Commands
+
+  ```cs
+  :references
+  :usings
+  :vars
+  ```
+
+  ```cs
+  :alias
+  :help //for general help
+  ```
+
+---
+
+# Loading Assemblies and Scripts
+
+  - Loading Assemblies : `#r` 
+
+  ```cs
+  #r "System.Data"
+   ```
+
+  - Loading Scripts : `#load` (recursive)
+    
+    ```cs
+    #load "HelloWorld.csx"
+    Hello World
+    ```
+
+---
+
+# Package Mangement
+
+  - NuGet Packages
+    
+    ```cs
+    scriptcs install CsvHelper
+    ```
+  
+  - Move the packages.config around between VS and ScriptCS
+
+  - Makes scripts re-usable by default
+
+---
+
+# Script Packs
+
+  - ScriptPacks
+    
+    - Just Nuget Packages
+    - Remove the boilerplate
+    
+    ```cs
+      scriptcs -install ScriptCs.Nancy
+    ```
+  - Packs are available for 
+    - Web API
+    - WPF
+    - Win Forms
+
+---
+# Use Cases
+
+  - Hosting Nancy API (or Asp.net Web API)
+
+    - Evolving an API iteratively
+    - Exploring an external API
+    - e.g. Hosting end points for acceptance testing
+    
+
+  - Talking to Redis (or your favourite storage system)
+
+    - Iteratively explore the data through REPL
+    - Talk to production systems without the need to spin up VS
+
+---
+# Use Cases
+  
+  - Fluent Automation
+
+    - Iteratively build up Test Scenarios
+    - REPL to drive testing
+    - Keep it in script or move it to VS
+  
+  - Build Systems
+
+    - Abstractions over ScriptCS like PVC ..
+    - Build, Tests and faster feedback
+  
+  - Typed Configuration using ConfigR
+    - No more XML and more flexibility with real types
+
+---
+
+# Version Management
+
+  - SVM
+    - Manage multiple ScriptCS version
+
+  - Install
+  ```powershell
+  @powershell -NoProfile -ExecutionPolicy unrestricted -Command 
+  "iex ((new-object net.webclient)
+  .DownloadString('https://raw.githubusercontent.com/
+  scriptcs-contrib/svm/master/install/installer.ps1'))" 
+  && SET PATH=%HOME%\.svm\bin\;%HOME%\.svm\shims\;%PATH%
+  ```
+    - Full Details on Github ***scriptcs-contrib/svm***
+
+---
+# Community
+  - Receptive to suggestions and change
+  
+  - Easy to get started and super easy to ask for help
+---
+
+# Takeaway
+
+  - ScriptCS- Use C# as a scripting language
+    - For just about everything
+  
+  - Touches every aspect of your dev life
+---
+
+
+#Resources
+
+  - ScriptCS   http://scriptcs.net/
+
+  - Github     https://github.com/scriptcs
+
+  - Chocolatey https://chocolatey.org/ 
+
+  - SVM        https://github.com/scriptcs-contrib/svm
+
+  - Community  https://github.com/scriptcs-contrib
+
+---
+
+class: top, center, title
+#Questions
+
+---
+class: top, center, title
+#Thank you
+
+    </textarea>
+
+    <script src="remark.js">
+    </script>
+    <script>
+      var slideshow = remark.create({
+        highlightStyle: 'monokai'
+      });
+    </script>
+
+  </body>
+</html>
